@@ -1,0 +1,41 @@
+.wrapper {
+  --_maxWidth: 300px;
+  width: 100%;
+  max-width: var(--_maxWidth);
+  padding: var(--spacingSm);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: var(--spacingMd);
+  border-radius: var(--radiusXs);
+  background-color: var(--colorBg1);
+}
+
+.heading {
+}
+
+.container {
+  position: relative;
+  display: grid;
+  gap: var(--spacingSm);
+  align-content: start;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: #fff;
+    opacity: 0;
+    color: hsl(calc(100 * 180), 50%, 50%);
+  }
+
+  & > * {
+    z-index: 1;
+  }
+
+  &[data-is-dragging='true'] {
+    &::before {
+      opacity: 0.02;
+    }
+  }
+}

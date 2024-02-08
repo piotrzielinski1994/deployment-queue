@@ -1,10 +1,5 @@
-import styles from './page.module.css';
-import Qwe from '@/components/qwe';
+import Dashboard from '@/components/dashboard/dashboard';
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <Qwe />
-    </main>
-  );
+  return <Dashboard />;
 }

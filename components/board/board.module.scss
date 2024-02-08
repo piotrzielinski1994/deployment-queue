@@ -1,0 +1,11 @@
+.wrapper {
+  width: 100%;
+  max-width: 620px;
+  padding: 100px;
+  grid-area: board;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-content: center;
+}

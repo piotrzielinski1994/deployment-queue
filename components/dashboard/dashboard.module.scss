@@ -1,0 +1,6 @@
+.wrapper {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  grid-template-areas: 'board sidebar';
+}

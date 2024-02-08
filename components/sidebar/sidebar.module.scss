@@ -1,0 +1,9 @@
+.wrapper {
+  grid-area: sidebar;
+  padding: var(--spacingSm);
+  display: flex;
+  gap: var(--spacingXs);
+  flex-wrap: wrap;
+  align-content: start;
+  background-color: var(--colorBg1);
+}
