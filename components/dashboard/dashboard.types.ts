@@ -24,12 +24,19 @@ export interface IColumn {
 export type Columns = Record<string, IColumn>;
 export type ColumnDispatcher = Dispatch<Action>;
 
-export type Action = ActionInsert | ActionReorder | ActionCopy | ActionMove;
+export type Action = ActionInsert | ActionRemove | ActionReorder | ActionCopy | ActionMove;
 
 interface ActionInsert {
   type: 'insert';
   payload: Omit<ActionPayload, 'src'> & {
     name: string;
+  };
+}
+
+interface ActionRemove {
+  type: 'remove';
+  payload: Omit<ActionPayload, 'dst'> & {
+    draggableId: string;
   };
 }
 
