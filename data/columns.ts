@@ -1,1 +1,1 @@
-export const columns = ['deploying', 'queue'];
+export const columns = ['deploying', 'waiting'];
