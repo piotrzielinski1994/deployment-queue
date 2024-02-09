@@ -1,8 +1,9 @@
-import { tags } from '@/data/tags';
 import { HTMLProps } from 'react';
+import { ColumnDispatcher, Columns } from '../dashboard/dashboard.types';
 
 export interface BoardProps extends HTMLProps<HTMLDivElement> {}
 
 export interface BoardContainerProps extends BoardProps {
-  columns: Record<string, typeof tags>;
+  columns: Columns;
+  dispatch: ColumnDispatcher;
 }

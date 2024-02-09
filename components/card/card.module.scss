@@ -1,0 +1,33 @@
+.wrapper {
+  padding: var(--spacingSm);
+  display: grid;
+  gap: var(--spacingSm);
+  background-color: var(--colorBg2);
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacingXs);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: #fff;
+    opacity: 0;
+    color: hsl(calc(100 * 180), 50%, 50%);
+  }
+
+  & > * {
+    z-index: 1;
+  }
+
+  &[data-is-dragging-over='true'] {
+    &::before {
+      opacity: 0.02;
+    }
+  }
+}

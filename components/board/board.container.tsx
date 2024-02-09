@@ -3,11 +3,11 @@ import { BoardContainerProps } from './board.types';
 import Board from './board';
 import ColumnContainer from '@/components/column/column.container';
 
-const BoardContainer = (props: BoardContainerProps) => {
+const BoardContainer = ({ columns, dispatch }: BoardContainerProps) => {
   return (
     <Board>
-      {Object.entries(props.columns).map(([column, columnItems]) => (
-        <ColumnContainer key={column} droppableId={column} heading={column} items={columnItems} />
+      {Object.entries(columns).map(([id, column]) => (
+        <ColumnContainer key={id} column={column} dispatch={dispatch} />
       ))}
     </Board>
   );

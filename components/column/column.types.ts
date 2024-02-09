@@ -1,12 +1,12 @@
-import { tags } from '@/data/tags';
-import { DroppableProps } from '@hello-pangea/dnd';
 import { HTMLProps } from 'react';
+import { ColumnDispatcher, IColumn } from '../dashboard/dashboard.types';
 
 export interface ColumnProps extends HTMLProps<HTMLDivElement> {
   heading: string;
+  addCard?: () => void;
 }
 
-export interface ColumnContainerProps extends ColumnProps {
-  droppableId: DroppableProps['droppableId'];
-  items: typeof tags;
+export interface ColumnContainerProps {
+  column: IColumn;
+  dispatch: ColumnDispatcher;
 }

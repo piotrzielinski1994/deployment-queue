@@ -8,9 +8,10 @@ import BoardContainer from '@/components/board/board.container';
 import withRuntime from '@/components/hoc/with-runtime/with-runtime';
 import { useDashboard } from './dashboard.hooks';
 import { takeAction } from './dashboard.helpers';
+import { tags } from '@/data/tags';
 
 export const Dashboard = () => {
-  const [{ ITEMS: tags, ...columns }, dispatch] = useDashboard();
+  const [columns, dispatch] = useDashboard();
 
   const onDragEnd: OnDragEndResponder = (metadata) => {
     const action = takeAction(metadata);
@@ -22,7 +23,7 @@ export const Dashboard = () => {
     <div className={styles.wrapper}>
       <DragDropContext onDragEnd={onDragEnd}>
         <SidebarContainer droppableId="ITEMS" tags={tags} />
-        <BoardContainer columns={columns} />
+        <BoardContainer columns={columns} dispatch={dispatch} />
       </DragDropContext>
     </div>
   );

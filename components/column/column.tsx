@@ -1,13 +1,23 @@
-import React, { ForwardedRef, HTMLProps, forwardRef } from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import styles from './column.module.scss';
 import { ColumnProps } from './column.types';
 
 const Column = forwardRef(
-  ({ heading, ...props }: ColumnProps, ref: ForwardedRef<HTMLDivElement>) => {
+  ({ heading, addCard, ...props }: ColumnProps, ref: ForwardedRef<HTMLDivElement>) => {
     return (
       <div className={styles.wrapper}>
-        <h2 className={styles.heading}>{heading}</h2>
-        <div className={styles.container} ref={ref} {...props} />
+        <header className={styles.header}>
+          <h2 className={styles.heading}>{heading}</h2>
+          {addCard && (
+            <form onSubmit={addCard}>
+              <input type="text" name="name" required />
+            </form>
+            // <button onClick={addCard} type="button">
+            //   Add Card
+            // </button>
+          )}
+        </header>
+        <div className={styles.container} ref={ref} {...props} data-droppable="column" />
       </div>
     );
   }

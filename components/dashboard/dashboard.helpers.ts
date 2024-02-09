@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { tags } from '@/data/tags';
-import { Action, Columns } from './dashboard.types';
+import { Action, Columns, ICard } from './dashboard.types';
 import { columns } from '@/data/columns';
 import { DropResult, DroppableProps } from '@hello-pangea/dnd';
 
@@ -8,53 +8,106 @@ export const defaultColumns: Columns = {
   ...columns.reduce(
     (acc, column) => ({
       ...acc,
-      [column]: [],
+      // [column.id]: column,
+      [column.id]: {
+        ...column,
+        cards: [
+          {
+            id: uuid(),
+            heading: 'Piotr',
+            tags: [
+              {
+                id: uuid(),
+                label: tags[0].label,
+              },
+            ],
+          },
+          {
+            id: uuid(),
+            heading: 'Hassan',
+            tags: [
+              {
+                id: uuid(),
+                label: tags[1].label,
+              },
+            ],
+          },
+        ],
+      },
     }),
     {}
   ),
-  ITEMS: tags,
 };
 
-export const columnsReducer = (state: Columns, action: Action) => {
+export const columnsReducer = (columns: Columns, action: Action): Columns => {
+  if (action.payload.dst.droppableId === 'card') return columns;
   // TODO: Remove mutations
   switch (action.type) {
-    case 'reorder': {
-      const result = Array.from(state[action.payload.source.droppableId]);
-      const [removed] = result.splice(action.payload.source.index, 1);
-      result.splice(action.payload.destination!.index, 0, removed);
+    case 'insert': {
+      const card: ICard = {
+        id: uuid(),
+        heading: action.payload.name,
+        tags: [],
+      };
 
       return {
-        ...state,
-        [action.payload.source.droppableId]: result,
+        ...columns,
+        [action.payload.dst.droppableId]: {
+          ...columns[action.payload.dst.droppableId],
+          cards: [...columns[action.payload.dst.droppableId].cards, card],
+        },
+      };
+    }
+    case 'reorder': {
+      const cards = Array.from(columns[action.payload.src.droppableId].cards);
+      const [removed] = cards.splice(action.payload.src.index, 1);
+
+      cards.splice(action.payload.dst.index, 0, removed);
+
+      return {
+        ...columns,
+        [action.payload.src.droppableId]: {
+          ...columns[action.payload.src.droppableId],
+          cards: cards,
+        },
       };
     }
     case 'copy': {
-      const sourceClone = Array.from(state[action.payload.source.droppableId]);
-      const destClone = Array.from(state[action.payload.destination!.droppableId]);
-      const item = sourceClone[action.payload.source.index];
+      const srcCards = Array.from(columns[action.payload.src.droppableId].cards);
+      const dstCards = Array.from(columns[action.payload.dst.droppableId].cards);
+      const card = srcCards[action.payload.src.index];
 
-      destClone.splice(action.payload.destination!.index, 0, { ...item, id: uuid() });
+      dstCards.splice(action.payload.dst.index, 0, { ...card, id: uuid() });
 
       return {
-        ...state,
-        [action.payload.destination!.droppableId]: destClone,
+        ...columns,
+        [action.payload.dst.droppableId]: {
+          ...columns[action.payload.dst.droppableId],
+          cards: dstCards,
+        },
       };
     }
     case 'move': {
-      const sourceClone = Array.from(state[action.payload.source.droppableId]);
-      const destClone = Array.from(state[action.payload.destination!.droppableId]);
-      const [removed] = sourceClone.splice(action.payload.source.index, 1);
+      const srcCards = Array.from(columns[action.payload.src.droppableId].cards);
+      const dstCards = Array.from(columns[action.payload.dst.droppableId].cards);
+      const [removed] = srcCards.splice(action.payload.src.index, 1);
 
-      destClone.splice(action.payload.destination!.index, 0, removed);
+      dstCards.splice(action.payload.dst.index, 0, removed);
 
       return {
-        ...state,
-        [action.payload.source.droppableId]: sourceClone,
-        [action.payload.destination!.droppableId]: destClone,
+        ...columns,
+        [action.payload.src.droppableId]: {
+          ...columns[action.payload.src.droppableId],
+          cards: srcCards,
+        },
+        [action.payload.dst.droppableId]: {
+          ...columns[action.payload.dst.droppableId],
+          cards: dstCards,
+        },
       };
     }
     default: {
-      return state;
+      return columns;
     }
   }
 };
@@ -73,15 +126,37 @@ export const takeActionType = (
   }
 };
 
-export const takeAction = (metadata: DropResult): Action | undefined => {
+export const takeAction = (metadata: DropResult, name?: string): Action | undefined => {
   if (!metadata.destination?.droppableId) {
     return;
   }
 
   const actionType = takeActionType(metadata.source.droppableId, metadata.destination.droppableId);
+  const src = {
+    droppableId: metadata.source.droppableId,
+    index: metadata.source.index,
+  };
+  const dst = {
+    droppableType: metadata.type,
+    droppableId: metadata.destination.droppableId,
+    index: metadata.destination.index,
+  };
+
+  if (actionType === 'insert') {
+    return {
+      type: 'insert',
+      payload: {
+        dst,
+        name: name ?? '',
+      },
+    };
+  }
 
   return {
     type: actionType,
-    payload: metadata,
+    payload: {
+      src,
+      dst,
+    },
   };
 };

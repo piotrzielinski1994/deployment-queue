@@ -10,6 +10,12 @@
   background-color: var(--colorBg1);
 }
 
+.header {
+  display: flex;
+  gap: var(--spacingMd);
+  justify-content: space-between;
+}
+
 .heading {
   text-align: center;
 }
@@ -34,7 +40,7 @@
     z-index: 1;
   }
 
-  &[data-is-dragging='true'] {
+  &[data-is-dragging-over='true'] {
     &::before {
       opacity: 0.02;
     }

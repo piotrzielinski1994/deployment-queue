@@ -1,23 +1,61 @@
-import { tags } from '@/data/tags';
 import { DropResult } from '@hello-pangea/dnd';
 import { Dispatch } from 'react';
 
-export type Columns = Record<string, typeof tags>;
+// =====================
+export interface ITag {
+  id: string;
+  label: string;
+}
+
+export interface ICard {
+  id: string;
+  heading: string;
+  tags: ITag[];
+}
+
+export interface IColumn {
+  id: string;
+  heading: string;
+  canAdd?: true;
+  cards: ICard[];
+}
+// =====================
+
+export type Columns = Record<string, IColumn>;
 export type ColumnDispatcher = Dispatch<Action>;
 
-export type Action = ActionReorderColumnItens | ActionCopyToColumn | ActionMoveBetweenColumns;
+export type Action = ActionInsert | ActionReorder | ActionCopy | ActionMove;
 
-interface ActionReorderColumnItens {
+interface ActionInsert {
+  type: 'insert';
+  payload: Omit<ActionPayload, 'src'> & {
+    name: string;
+  };
+}
+
+interface ActionReorder {
   type: 'reorder';
-  payload: DropResult;
+  payload: ActionPayload;
 }
 
-interface ActionCopyToColumn {
+interface ActionCopy {
   type: 'copy';
-  payload: DropResult;
+  payload: ActionPayload;
 }
 
-interface ActionMoveBetweenColumns {
+interface ActionMove {
   type: 'move';
-  payload: DropResult;
+  payload: ActionPayload;
+}
+
+interface ActionPayload {
+  src: {
+    droppableId: string;
+    index: number;
+  };
+  dst: {
+    droppableId: string;
+    index: number;
+    droppableType: string;
+  };
 }
