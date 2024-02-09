@@ -10,7 +10,13 @@ const Column = forwardRef(
           <h2 className={styles.heading}>{heading}</h2>
           {addCard && (
             <form onSubmit={addCard}>
-              <input type="text" name="name" required />
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="Type your name"
+                className={styles.input}
+              />
             </form>
             // <button onClick={addCard} type="button">
             //   Add Card

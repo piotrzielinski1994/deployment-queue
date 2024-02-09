@@ -28,9 +28,13 @@ const CardContainer = ({ card, index }: CardContainerProps) => {
                   ref={provided.innerRef}
                   data-is-dragging-over={snapshot.isDraggingOver}
                 >
-                  {card.tags.map((tag, index) => {
-                    return <TagContainer key={tag.id} tag={tag} index={index} />;
-                  })}
+                  {card.tags.length === 0 ? (
+                    <p className={styles.empty}>No tags</p>
+                  ) : (
+                    card.tags.map((tag, index) => {
+                      return <TagContainer key={tag.id} tag={tag} index={index} />;
+                    })
+                  )}
                 </div>
               )}
             </Droppable>

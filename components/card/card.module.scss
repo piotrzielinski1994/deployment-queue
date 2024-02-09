@@ -3,6 +3,7 @@
   display: grid;
   gap: var(--spacingSm);
   background-color: var(--colorBg2);
+  cursor: grab;
 }
 
 .content {
@@ -30,4 +31,9 @@
       opacity: 0.02;
     }
   }
+}
+
+.empty {
+  font-size: var(--fontSizeXs);
+  font-style: italic;
 }

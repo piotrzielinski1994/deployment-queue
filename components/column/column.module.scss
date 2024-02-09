@@ -1,6 +1,7 @@
 .wrapper {
-  --_maxWidth: 300px;
-  width: 100%;
+  --_maxWidth: 350px;
+  // width: 100%;
+  width: var(--_maxWidth);
   max-width: var(--_maxWidth);
   padding: var(--spacingSm);
   display: grid;
@@ -14,10 +15,29 @@
   display: flex;
   gap: var(--spacingMd);
   justify-content: space-between;
+  align-items: end;
 }
 
 .heading {
   text-align: center;
+  width: 100%;
+}
+
+.input {
+  padding-block: var(--spacingXs);
+  padding-inline: var(--spacingSm);
+  background-color: var(--colorBg2);
+  border: none;
+
+  &:placeholder-shown {
+    color: var(--colorText);
+  }
+
+  &:focus,
+  &:focus-within,
+  &:focus-visible {
+    outline: 2px solid var(--colorText);
+  }
 }
 
 .container {
