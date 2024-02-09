@@ -44,7 +44,8 @@ export const defaultColumns: Columns = {
 };
 
 export const columnsReducer = (columns: Columns, action: Action): Columns => {
-  if (action.payload.dst?.droppableId === 'card') return columns;
+  // @ts-ignore
+  if (action.payload.dst.droppableId === 'card') return columns;
   // TODO: Remove mutations
   switch (action.type) {
     case 'insert': {
