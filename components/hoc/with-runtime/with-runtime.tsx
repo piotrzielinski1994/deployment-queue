@@ -1,6 +1,6 @@
-import React, { useState, useEffect, ComponentType } from 'react';
+import React, { useState, useEffect, ComponentType, ComponentProps } from 'react';
 
-const withRuntime = <P extends object>(WrappedComponent: ComponentType<P>) => {
+const withRuntime = <P,>(WrappedComponent: ComponentType<P>) => {
   return (props: P) => {
     const [isMounted, setIsMounted] = useState(false);
 
@@ -9,11 +9,13 @@ const withRuntime = <P extends object>(WrappedComponent: ComponentType<P>) => {
     }, []);
 
     if (!isMounted) {
-      return <></>; // Return null instead of empty fragment for unmounted state
+      return <></>;
     }
 
-    return <WrappedComponent props={props} />;
+    return <WrappedComponent {...(props as any)} />;
   };
 };
+
+withRuntime.displayName = 'withRuntime';
 
 export default withRuntime;

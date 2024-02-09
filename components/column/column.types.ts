@@ -3,7 +3,7 @@ import { ColumnDispatcher, IColumn } from '../dashboard/dashboard.types';
 
 export interface ColumnProps extends HTMLProps<HTMLDivElement> {
   heading: string;
-  addCard?: () => void;
+  addCard?: (event: any) => void;
 }
 
 export interface ColumnContainerProps {
