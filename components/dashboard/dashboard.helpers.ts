@@ -14,7 +14,7 @@ export const defaultColumns: Columns = {
         cards: [
           {
             id: uuid(),
-            heading: 'Piotr',
+            heading: 'John',
             tags: [
               {
                 id: uuid(),
@@ -24,11 +24,15 @@ export const defaultColumns: Columns = {
           },
           {
             id: uuid(),
-            heading: 'Hassan',
+            heading: 'Doe',
             tags: [
               {
                 id: uuid(),
                 label: tags[1].label,
+              },
+              {
+                id: uuid(),
+                label: tags[2].label,
               },
             ],
           },
