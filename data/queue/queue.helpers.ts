@@ -6,7 +6,7 @@ import { DropResult, DroppableProps } from '@hello-pangea/dnd';
 import { generateCardId, generateTagId } from '@/utils/id';
 import { Card } from '@/data/cards/cards.types';
 
-export const defaultColumns: Columns = {
+export const defaultQueue: Columns = {
   ...columns.reduce(
     (acc, column) => ({
       ...acc,
@@ -45,7 +45,7 @@ export const defaultColumns: Columns = {
   ),
 };
 
-export const columnsReducer = (columns: Columns, action: Action): Columns => {
+export const queueReducer = (columns: Columns, action: Action): Columns => {
   // @ts-ignore
   if (action.payload.dst?.droppableId === 'card') return columns;
   // TODO: Remove mutations
@@ -132,7 +132,7 @@ export const columnsReducer = (columns: Columns, action: Action): Columns => {
   }
 };
 
-export const takeActionType = (
+export const takeQueueActionType = (
   source: DroppableProps['droppableId'],
   destination: DroppableProps['droppableId']
 ): Action['type'] => {
@@ -154,7 +154,7 @@ export const takeActionType = (
   }
 };
 
-export const takeAction = (
+export const takeQueueAction = (
   metadata: DropResult,
   options: { name?: string } | undefined = undefined
 ): Action | undefined => {
@@ -171,7 +171,10 @@ export const takeAction = (
     };
   }
 
-  const actionType = takeActionType(metadata.source.droppableId, metadata.destination.droppableId);
+  const actionType = takeQueueActionType(
+    metadata.source.droppableId,
+    metadata.destination.droppableId
+  );
   const src = {
     droppableId: metadata.source.droppableId,
     index: metadata.source.index,

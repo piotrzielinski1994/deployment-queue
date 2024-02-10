@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './global.scss';
+import QueueProvider from '@/components/provider/queue/queue.provider';
 
 export const metadata: Metadata = {
   title: 'Deployment Queue',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <QueueProvider>{children}</QueueProvider>
+      </body>
     </html>
   );
 }

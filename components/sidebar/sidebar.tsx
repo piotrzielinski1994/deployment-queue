@@ -1,11 +1,13 @@
 import Tag from '@/components/tag/tag';
 import { Droppable } from '@hello-pangea/dnd';
 import styles from './sidebar.module.scss';
-import { SidebarContainerProps } from './sidebar.types';
+import { DndDroppable } from '@/data/dnd/dnd.types';
+import { tags } from '@/data/tags/tags';
+import { TAG_CONTAINER } from '@/data/tags/tags.types';
 
-const SidebarContainer = ({ droppableId, tags }: SidebarContainerProps) => {
+const SidebarContainer = () => {
   return (
-    <Droppable type="tags" droppableId={droppableId} isDropDisabled={true}>
+    <Droppable type={DndDroppable.TAGS} droppableId={TAG_CONTAINER} isDropDisabled={true}>
       {(provided, snapshot) => (
         <div
           className={styles.wrapper}

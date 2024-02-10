@@ -1,8 +1,10 @@
 import { Column } from '@/data/columns/columns.types';
 import { Dispatch } from 'react';
 
-export type Columns = Record<string, Column>;
-export type ColumnDispatcher = Dispatch<Action>;
+export interface Queue {
+  queue: Record<Column['id'], Column>;
+  dispatchQueue: Dispatch<Action>;
+}
 
 export type Action = ActionInsert | ActionRemove | ActionReorder | ActionCopy | ActionMove;
 

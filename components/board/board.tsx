@@ -1,12 +1,13 @@
 import Column from '@/components/column/column';
 import styles from './board.module.scss';
-import { BoardProps } from './board.types';
+import { useQueue } from '@/components/provider/queue/queue.provider.hooks';
 
-const BoardContainer = ({ columns, dispatch }: BoardProps) => {
+const BoardContainer = () => {
+  const { queue } = useQueue();
   return (
     <div className={styles.wrapper}>
-      {Object.entries(columns).map(([id, column]) => (
-        <Column key={id} column={column} dispatch={dispatch} />
+      {Object.entries(queue).map(([id, column]) => (
+        <Column key={id} column={column} />
       ))}
     </div>
   );

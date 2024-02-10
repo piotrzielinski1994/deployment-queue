@@ -2,8 +2,11 @@ import Card from '@/components/card/card';
 import { Droppable } from '@hello-pangea/dnd';
 import styles from './column.module.scss';
 import { ColumnProps } from './column.types';
+import { useQueue } from '@/components/provider/queue/queue.provider.hooks';
 
-const Column = ({ column, dispatch }: ColumnProps) => {
+const Column = ({ column }: ColumnProps) => {
+  const { dispatchQueue } = useQueue();
+
   const addCard = (event: any) => {
     event.preventDefault();
     const name = event.target.elements.name.value;
@@ -12,7 +15,7 @@ const Column = ({ column, dispatch }: ColumnProps) => {
 
     event.target.elements.name.value = '';
 
-    dispatch({
+    dispatchQueue({
       type: 'insert',
       payload: {
         name,
