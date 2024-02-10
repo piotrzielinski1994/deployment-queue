@@ -3,9 +3,9 @@
 import React from 'react';
 import { useQueue } from '@/data/queue/queue.hooks';
 import { QueueProviderProps } from './queue.provider.types';
-import { Queue } from '@/data/queue/queue.types';
+import { QueueManager } from '@/data/queue/queue.types';
 
-export const QueueContext = React.createContext<Queue>({} as Queue);
+export const QueueContext = React.createContext<QueueManager>({} as QueueManager);
 
 const QueueProvider = ({ children }: QueueProviderProps) => {
   const queue = useQueue();

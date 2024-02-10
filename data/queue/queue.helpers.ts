@@ -1,12 +1,12 @@
 import { v4 as uuid } from 'uuid';
 import { tags } from '@/data/tags/tags';
-import { Action, Columns } from './dashboard.types';
 import { columns } from '@/data/columns/columns';
 import { DropResult, DroppableProps } from '@hello-pangea/dnd';
 import { generateCardId, generateTagId } from '@/utils/id';
 import { Card } from '@/data/cards/cards.types';
+import { QueueManager } from './queue.types';
 
-export const defaultQueue: Columns = {
+export const defaultQueue: QueueManager['queue']['columns'] = {
   ...columns.reduce(
     (acc, column) => ({
       ...acc,

@@ -1,43 +1,45 @@
 import { Column } from '@/data/columns/columns.types';
 import { Dispatch } from 'react';
 
-export interface Queue {
-  queue: Record<Column['id'], Column>;
+export interface QueueManager {
+  queue: {
+    columns: Record<Column['id'], Column>;
+  };
   dispatchQueue: Dispatch<Action>;
 }
 
-export type Action = ActionInsert | ActionRemove | ActionReorder | ActionCopy | ActionMove;
+export type Action = QueueInsert | QueueRemove | QueueReorder | QueueCopy | QueueMove;
 
-interface ActionInsert {
+interface QueueInsert {
   type: 'insert';
-  payload: Omit<ActionPayload, 'src'> & {
+  payload: Omit<QueuePayload, 'src'> & {
     name: string;
   };
 }
 
-interface ActionRemove {
+interface QueueRemove {
   type: 'remove';
-  payload: Omit<ActionPayload, 'dst'> & {
+  payload: Omit<QueuePayload, 'dst'> & {
     draggableId: string;
   };
 }
 
-interface ActionReorder {
+interface QueueReorder {
   type: 'reorder';
-  payload: ActionPayload;
+  payload: QueuePayload;
 }
 
-interface ActionCopy {
+interface QueueCopy {
   type: 'copy';
-  payload: ActionPayload;
+  payload: QueuePayload;
 }
 
-interface ActionMove {
+interface QueueMove {
   type: 'move';
-  payload: ActionPayload;
+  payload: QueuePayload;
 }
 
-interface ActionPayload {
+interface QueuePayload {
   src: {
     droppableId: string;
     index: number;
