@@ -1,41 +1,36 @@
 import Card from '@/components/card/card';
+import { useQueue } from '@/components/provider/queue/queue.provider.hooks';
+import { DndDroppable } from '@/data/dnd/dnd.types';
 import { Droppable } from '@hello-pangea/dnd';
 import styles from './column.module.scss';
 import { ColumnProps } from './column.types';
-import { useQueue } from '@/components/provider/queue/queue.provider.hooks';
 
 const Column = ({ column }: ColumnProps) => {
-  const { dispatchQueue } = useQueue();
+  const { addCard } = useQueue();
 
-  const addCard = (event: any) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
-    const name = event.target.elements.name.value;
 
+    const name = event.target.elements.name.value;
     if (!name) return;
 
-    event.target.elements.name.value = '';
+    event.target.elements['name'].value = '';
 
-    dispatchQueue({
-      type: 'insert',
-      payload: {
-        name,
-        dst: {
-          droppableType: 'column',
-          droppableId: column.id,
-          index: -1,
-        },
-      },
-    });
+    addCard(name, column.id);
   };
 
   return (
-    <Droppable droppableId={column.id} type="cards">
-      {(provided, snapshot) => (
-        <div className={styles.wrapper}>
+    <Droppable droppableId={column.id} type={DndDroppable.CARDS}>
+      {(droppableProvider, droppableSnapshot) => (
+        <div
+          className={styles.wrapper}
+          ref={droppableProvider.innerRef}
+          data-is-dragging-over={droppableSnapshot.isDraggingOver}
+        >
           <header className={styles.header}>
             <h2 className={styles.heading}>{column.heading}</h2>
-            {column.canAdd && (
-              <form onSubmit={addCard}>
+            {column.canAddCard && (
+              <form onSubmit={handleSubmit}>
                 <input
                   type="text"
                   name="name"
@@ -46,12 +41,7 @@ const Column = ({ column }: ColumnProps) => {
               </form>
             )}
           </header>
-          <div
-            className={styles.container}
-            data-droppable="column"
-            ref={provided.innerRef}
-            data-is-dragging-over={snapshot.isDraggingOver}
-          >
+          <div className={styles.container} data-droppable="column">
             {column.cards.map((card, index) => {
               return <Card key={card.id} card={card} index={index} />;
             })}
@@ -61,7 +51,5 @@ const Column = ({ column }: ColumnProps) => {
     </Droppable>
   );
 };
-
-Column.displayName = 'ColumnContainer';
 
 export default Column;

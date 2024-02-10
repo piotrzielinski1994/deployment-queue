@@ -16,6 +16,4 @@ const withRuntime = <P,>(WrappedComponent: ComponentType<P>) => {
   };
 };
 
-withRuntime.displayName = 'withRuntime';
-
 export default withRuntime;

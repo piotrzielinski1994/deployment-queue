@@ -1,18 +1,13 @@
 .wrapper {
-  padding: var(--spacingSm);
   display: grid;
   gap: var(--spacingSm);
   background-color: var(--colorBg2);
   cursor: grab;
 }
 
-.content {
+.droppable {
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacingXs);
-
-  padding: 5px;
+  padding: var(--spacingSm);
 
   &::before {
     content: '';
@@ -25,6 +20,7 @@
   }
 
   & > * {
+    isolation: isolate;
     z-index: 1;
   }
 
@@ -33,6 +29,16 @@
       opacity: 1;
     }
   }
+}
+
+.content {
+  display: grid;
+  justify-items: start;
+  // display: flex;
+  // flex-wrap: wrap;
+  gap: var(--spacingXs);
+
+  padding: 5px;
 }
 
 .empty {

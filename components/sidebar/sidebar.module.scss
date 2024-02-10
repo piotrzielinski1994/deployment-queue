@@ -1,9 +1,11 @@
 .wrapper {
   grid-area: sidebar;
   padding: var(--spacingMd);
-  display: flex;
+  display: grid;
+  // display: flex;
+  // flex-wrap: wrap;
   gap: var(--spacingXs);
-  flex-wrap: wrap;
+  justify-items: start;
   align-content: start;
   background-color: var(--colorBg1);
 }

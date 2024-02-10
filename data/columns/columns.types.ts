@@ -1,8 +1,8 @@
-import { CardContainerProps } from '@/components/card/card.types';
+import { Card } from '@/data/cards/cards.types';
 
 export interface Column {
   id: `column__${string}`;
   heading: string;
-  canAdd?: true;
-  cards: CardContainerProps[];
+  canAddCard?: true;
+  cards: Card[];
 }

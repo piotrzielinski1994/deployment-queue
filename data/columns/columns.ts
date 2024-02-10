@@ -11,6 +11,6 @@ export const columns: Column[] = [
     id: generateColumnId(),
     heading: 'Waiting',
     cards: [],
-    canAdd: true,
+    canAddCard: true,
   },
 ];

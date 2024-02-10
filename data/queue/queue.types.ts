@@ -1,11 +1,22 @@
 import { Column } from '@/data/columns/columns.types';
-import { Dispatch } from 'react';
 
 export interface QueueManager {
   queue: {
     columns: Record<Column['id'], Column>;
   };
-  dispatchQueue: Dispatch<Action>;
+  manageQueue: (data: QueueManagableConfig) => void;
+  addCard: (name: string, columnId: Column['id']) => void;
+}
+
+export interface QueueManagableConfig {
+  src: {
+    droppableId: string;
+    index: number;
+  };
+  dst: {
+    droppableId: string;
+    index: number;
+  } | null;
 }
 
 export type Action = QueueInsert | QueueRemove | QueueReorder | QueueCopy | QueueMove;
