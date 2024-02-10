@@ -1,11 +1,13 @@
 .wrapper {
   grid-area: sidebar;
   padding: var(--spacingMd);
+  padding-bottom: calc(var(--spacingMd) - var(--spacingXs));
   display: grid;
-  // display: flex;
-  // flex-wrap: wrap;
-  gap: var(--spacingXs);
   justify-items: start;
   align-content: start;
   background-color: var(--colorBg1);
+
+  & > * {
+    margin-bottom: var(--spacingXs);
+  }
 }

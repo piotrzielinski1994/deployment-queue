@@ -46,6 +46,7 @@ const Column = ({ column }: ColumnProps) => {
               return <Card key={card.id} card={card} index={index} />;
             })}
           </div>
+          {droppableProvider.placeholder}
         </div>
       )}
     </Droppable>

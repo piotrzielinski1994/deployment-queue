@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { tags } from '@/data/tags/tags';
 import { columns } from '@/data/columns/columns';
 import { DroppableProps } from '@hello-pangea/dnd';
@@ -66,6 +65,7 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
       };
     }
     case 'remove': {
+      return queue;
       const cards = columns[action.payload.src.droppableId].cards.filter(
         (card) => card.id !== action.payload.draggableId,
       );
@@ -121,7 +121,6 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
             ...dstColumn,
             cards: dstCards.map((card) => {
               if (card.id !== dstCard.id) return card;
-              console.log('@@@ card. | ', column.heading, card.heading);
               return {
                 ...card,
                 tags: dstTags,

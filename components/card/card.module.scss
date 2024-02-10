@@ -6,8 +6,9 @@
 .droppable {
   position: relative;
   padding: var(--spacingSm);
+  padding-bottom: calc(var(--spacingSm) - var(--spacingXs));
   display: grid;
-  gap: var(--spacingSm);
+  // gap: var(--spacingSm);
 
   &::before {
     content: '';
@@ -31,12 +32,21 @@
   }
 }
 
+.heading {
+  margin-bottom: var(--spacingSm);
+}
+
 .content {
   display: grid;
   justify-items: start;
+
+  & > * {
+    margin-bottom: var(--spacingXs);
+    // outline: 1px solid red;
+  }
   // display: flex;
   // flex-wrap: wrap;
-  gap: var(--spacingXs);
+  // gap: var(--spacingXs);
 }
 
 .empty {

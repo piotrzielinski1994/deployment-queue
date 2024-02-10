@@ -8,7 +8,7 @@ const Card = ({ card, index }: CardProps) => {
     <Draggable draggableId={card.id} index={index}>
       {(dragProvider, dragSnapshot) => (
         <Droppable droppableId={card.id} type="tags">
-          {(dropProvider, dropSnapshot) => (
+          {(droppableProvider, droppableSnapshot) => (
             <div
               className={styles.wrapper}
               data-draggable="card"
@@ -20,8 +20,8 @@ const Card = ({ card, index }: CardProps) => {
             >
               <div
                 className={styles.droppable}
-                ref={dropProvider.innerRef}
-                data-is-dragging-over={dropSnapshot.isDraggingOver}
+                ref={droppableProvider.innerRef}
+                data-is-dragging-over={droppableSnapshot.isDraggingOver}
               >
                 <h3 className={styles.heading}>{card.heading}</h3>
 
@@ -34,6 +34,7 @@ const Card = ({ card, index }: CardProps) => {
                     })
                   )}
                 </div>
+                {droppableProvider.placeholder}
               </div>
             </div>
           )}

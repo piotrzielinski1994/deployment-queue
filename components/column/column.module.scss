@@ -1,13 +1,14 @@
 .wrapper {
   --_maxWidth: 350px;
+  --_minHeight: 300px;
   position: relative;
-  // width: 100%;
   width: var(--_maxWidth);
   max-width: var(--_maxWidth);
+  min-height: var(--_minHeight);
   padding: var(--spacingMd);
+  padding-bottom: calc(var(--spacingMd) - var(--spacingSm));
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: var(--spacingMd);
   border-radius: var(--radiusXs);
   background-color: var(--colorBg1);
 
@@ -33,6 +34,7 @@
 }
 
 .header {
+  margin-bottom: var(--spacingMd);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacingMd);
@@ -63,6 +65,9 @@
 
 .container {
   display: grid;
-  gap: var(--spacingSm);
   align-content: start;
+
+  & > * {
+    margin-bottom: var(--spacingSm);
+  }
 }

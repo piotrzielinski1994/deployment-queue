@@ -2,14 +2,13 @@
   padding-block: var(--spacingXs2);
   padding-inline: var(--spacingXs);
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--spacingXs2);
   align-items: center;
   border-radius: 2px;
   background-color: var(--colorBgActive);
   color: #fff;
   font-size: var(--fontSizeXs);
   cursor: grab;
+  // margin-bottom: 5px;
 
   [data-is-dragging='true'] {
     background-color: red;
