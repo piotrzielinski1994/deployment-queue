@@ -1,27 +1,7 @@
-import { DropResult } from '@hello-pangea/dnd';
+import { Column } from '@/data/columns/columns.types';
 import { Dispatch } from 'react';
 
-// =====================
-export interface ITag {
-  id: string;
-  label: string;
-}
-
-export interface ICard {
-  id: string;
-  heading: string;
-  tags: ITag[];
-}
-
-export interface IColumn {
-  id: string;
-  heading: string;
-  canAdd?: true;
-  cards: ICard[];
-}
-// =====================
-
-export type Columns = Record<string, IColumn>;
+export type Columns = Record<string, Column>;
 export type ColumnDispatcher = Dispatch<Action>;
 
 export type Action = ActionInsert | ActionRemove | ActionReorder | ActionCopy | ActionMove;

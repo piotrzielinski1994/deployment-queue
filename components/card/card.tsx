@@ -1,25 +1,45 @@
-import React, { ForwardedRef, HTMLProps, forwardRef } from 'react';
+import Tag from '@/components/tag/tag';
+import { Draggable, Droppable } from '@hello-pangea/dnd';
 import styles from './card.module.scss';
 import { CardProps } from './card.types';
 
-const Card = forwardRef(({ heading, ...props }: CardProps, ref: ForwardedRef<HTMLDivElement>) => {
-  const classNames = [styles.wrapper, props.className].filter(Boolean).join(' ');
+const Card = ({ card, index }: CardProps) => {
   return (
-    <div {...props} className={classNames}>
-      <h3 className={styles.heading}>{heading}</h3>
-      {/* <svg width="24" height="24" viewBox="0 0 24 24">
-        <path
-          fill="currentColor"
-          d="M3,15H21V13H3V15M3,19H21V17H3V19M3,11H21V9H3V11M3,5V7H21V5H3Z"
-        />
-      </svg> */}
-      <div className={styles.content} ref={ref} {...props}>
-        {props.children}
-      </div>
-    </div>
+    <Draggable draggableId={card.id} index={index}>
+      {(provided, snapshot) => (
+        <>
+          <div
+            className={styles.wrapper}
+            data-draggable="card"
+            data-is-dragging={snapshot.isDragging}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            style={provided.draggableProps.style}
+          >
+            <h3 className={styles.heading}>{card.heading}</h3>
+            <Droppable droppableId={card.id} type="tags">
+              {(provided, snapshot) => (
+                <div
+                  className={styles.content}
+                  ref={provided.innerRef}
+                  data-is-dragging-over={snapshot.isDraggingOver}
+                >
+                  {card.tags.length === 0 ? (
+                    <p className={styles.empty}>No tags</p>
+                  ) : (
+                    card.tags.map((tag, index) => {
+                      return <Tag key={tag.id} tag={tag} index={index} />;
+                    })
+                  )}
+                </div>
+              )}
+            </Droppable>
+          </div>
+        </>
+      )}
+    </Draggable>
   );
-});
-
-Card.displayName = 'Tag';
+};
 
 export default Card;

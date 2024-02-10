@@ -10,4 +10,8 @@
   color: #fff;
   font-size: var(--fontSizeXs);
   cursor: grab;
+
+  [data-is-dragging='true'] {
+    background-color: red;
+  }
 }

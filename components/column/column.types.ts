@@ -1,12 +1,7 @@
-import { HTMLProps } from 'react';
-import { ColumnDispatcher, IColumn } from '../dashboard/dashboard.types';
+import { ColumnDispatcher } from '../dashboard/dashboard.types';
+import { Column } from '@/data/columns/columns.types';
 
-export interface ColumnProps extends HTMLProps<HTMLDivElement> {
-  heading: string;
-  addCard?: (event: any) => void;
-}
-
-export interface ColumnContainerProps {
-  column: IColumn;
+export interface ColumnProps {
+  column: Column;
   dispatch: ColumnDispatcher;
 }

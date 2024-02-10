@@ -1,8 +1,10 @@
 import { v4 as uuid } from 'uuid';
-import { tags } from '@/data/tags';
-import { Action, Columns, ICard } from './dashboard.types';
-import { columns } from '@/data/columns';
+import { tags } from '@/data/tags/tags';
+import { Action, Columns } from './dashboard.types';
+import { columns } from '@/data/columns/columns';
 import { DropResult, DroppableProps } from '@hello-pangea/dnd';
+import { generateCardId, generateTagId } from '@/utils/id';
+import { Card } from '@/data/cards/cards.types';
 
 export const defaultColumns: Columns = {
   ...columns.reduce(
@@ -13,25 +15,25 @@ export const defaultColumns: Columns = {
         ...column,
         cards: [
           {
-            id: uuid(),
+            id: generateCardId(),
             heading: 'John',
             tags: [
               {
-                id: uuid(),
+                id: generateTagId(),
                 label: tags[0].label,
               },
             ],
           },
           {
-            id: uuid(),
+            id: generateCardId(),
             heading: 'Doe',
             tags: [
               {
-                id: uuid(),
+                id: generateTagId(),
                 label: tags[1].label,
               },
               {
-                id: uuid(),
+                id: generateTagId(),
                 label: tags[2].label,
               },
             ],
@@ -49,8 +51,8 @@ export const columnsReducer = (columns: Columns, action: Action): Columns => {
   // TODO: Remove mutations
   switch (action.type) {
     case 'insert': {
-      const card: ICard = {
-        id: uuid(),
+      const card: Card = {
+        id: generateCardId(),
         heading: action.payload.name,
         tags: [],
       };

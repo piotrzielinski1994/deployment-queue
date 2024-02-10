@@ -1,21 +1,28 @@
-import React, { ForwardedRef, HTMLProps, forwardRef } from 'react';
+import React from 'react';
 import styles from './tag.module.scss';
+import { TagProps } from './tag.types';
+import { Draggable } from '@hello-pangea/dnd';
 
-const Tag = forwardRef((props: HTMLProps<HTMLDivElement>, ref: ForwardedRef<HTMLDivElement>) => {
-  const classNames = [styles.wrapper, props.className].filter(Boolean).join(' ');
+const Tag = ({ tag, index }: TagProps) => {
   return (
-    <div ref={ref} {...props} className={classNames}>
-      {/* <svg width="24" height="24" viewBox="0 0 24 24">
-        <path
-          fill="currentColor"
-          d="M3,15H21V13H3V15M3,19H21V17H3V19M3,11H21V9H3V11M3,5V7H21V5H3Z"
-        />
-      </svg> */}
-      {props.children}
-    </div>
+    <Draggable draggableId={tag.id} index={index}>
+      {(provided, snapshot) => (
+        <>
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            data-is-dragging={snapshot.isDragging}
+            className={styles.wrapper}
+            style={provided.draggableProps.style}
+          >
+            {tag.label}
+          </div>
+          {snapshot.isDragging && <div className={styles.wrapper}>{tag.label}</div>}
+        </>
+      )}
+    </Draggable>
   );
-});
-
-Tag.displayName = 'Tag';
+};
 
 export default Tag;

@@ -1,92 +1,93 @@
-import { v4 as uuid } from 'uuid';
+import { generateTagId } from '@/utils/id';
+import { Tag } from './tags.types';
 
-export const tags = [
+export const tags: Tag[] = [
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'file-upload-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'partnerize-adapter-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'marketplace-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'society-app-ui',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'transaction-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'society-admin-ui',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'commission-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'instagram-integration-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'kotlin-shared',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'agency-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'influencer-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'feature-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'notification-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'watchman-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'programme-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'payment-details-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'docker-images',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'profile-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'unity-deployment-manager',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'reporting-ms',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'k8s',
   },
   {
-    id: uuid(),
+    id: generateTagId(),
     label: 'society-keycloak-theme',
   },
 ];

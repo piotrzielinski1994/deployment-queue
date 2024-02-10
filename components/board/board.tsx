@@ -1,11 +1,15 @@
-import React, { ForwardedRef, forwardRef } from 'react';
+import Column from '@/components/column/column';
 import styles from './board.module.scss';
 import { BoardProps } from './board.types';
 
-const Board = forwardRef((props: BoardProps, ref: ForwardedRef<HTMLDivElement>) => {
-  return <div className={styles.wrapper} ref={ref} {...props} />;
-});
+const BoardContainer = ({ columns, dispatch }: BoardProps) => {
+  return (
+    <div className={styles.wrapper}>
+      {Object.entries(columns).map(([id, column]) => (
+        <Column key={id} column={column} dispatch={dispatch} />
+      ))}
+    </div>
+  );
+};
 
-Board.displayName = 'Tag';
-
-export default Board;
+export default BoardContainer;

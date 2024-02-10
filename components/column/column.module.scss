@@ -12,10 +12,10 @@
 }
 
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--spacingMd);
-  justify-content: space-between;
-  align-items: end;
+  align-items: center;
 }
 
 .heading {

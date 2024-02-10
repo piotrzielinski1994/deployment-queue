@@ -1,11 +1,6 @@
-import { HTMLProps } from 'react';
-import { ICard } from '../dashboard/dashboard.types';
+import { Card } from '@/data/cards/cards.types';
 
-export interface CardProps extends HTMLProps<HTMLDivElement> {
-  heading: string;
-}
-
-export interface CardContainerProps {
-  card: ICard;
+export interface CardProps {
+  card: Card;
   index: number;
 }

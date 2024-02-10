@@ -1,6 +1,6 @@
-import { tags } from '@/data/tags';
+import { Tag } from '@/data/tags/tags.types';
 
-export interface TagContainerProps {
-  tag: (typeof tags)[0];
+export interface TagProps {
+  tag: Tag;
   index: number;
 }
