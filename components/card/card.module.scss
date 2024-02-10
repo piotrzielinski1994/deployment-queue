@@ -1,6 +1,4 @@
 .wrapper {
-  display: grid;
-  gap: var(--spacingSm);
   background-color: var(--colorBg2);
   cursor: grab;
 }
@@ -8,6 +6,8 @@
 .droppable {
   position: relative;
   padding: var(--spacingSm);
+  display: grid;
+  gap: var(--spacingSm);
 
   &::before {
     content: '';
@@ -37,8 +37,6 @@
   // display: flex;
   // flex-wrap: wrap;
   gap: var(--spacingXs);
-
-  padding: 5px;
 }
 
 .empty {

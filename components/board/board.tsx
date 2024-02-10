@@ -6,8 +6,8 @@ const BoardContainer = () => {
   const { queue } = useQueue();
   return (
     <div className={styles.wrapper}>
-      {Object.entries(queue).map(([id, column]) => (
-        <Column key={id} column={column} />
+      {queue.columns.map((column) => (
+        <Column key={column.id} column={column} />
       ))}
     </div>
   );

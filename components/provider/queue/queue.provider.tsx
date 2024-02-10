@@ -12,14 +12,14 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
   const { queue, dispatchQueue } = useQueue();
 
   const manageQueue: QueueManager['manageQueue'] = useCallback(
-    (metadata: any) => {
-      console.log('@@@ metadata | ', metadata);
-      if (metadata.source.droppableId) return;
-      const action = takeQueueAction(metadata);
+    (data) => {
+      console.log('@@@ data | ', data);
+      const action = takeQueueAction(data);
+      console.log('@@@ action | ', action);
       if (!action) return;
       dispatchQueue(action);
     },
-    [dispatchQueue]
+    [dispatchQueue],
   );
 
   const addCard: QueueManager['addCard'] = useCallback(
@@ -36,7 +36,7 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
         },
       });
     },
-    [dispatchQueue]
+    [dispatchQueue],
   );
 
   const state = useMemo(() => {
