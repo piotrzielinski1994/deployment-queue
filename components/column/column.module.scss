@@ -51,27 +51,13 @@
   position: relative;
   min-height: 200px;
   padding: var(--spacingSm);
-  // padding-top: var(--spacingXs2);
   padding-top: 0;
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-color: var(--colorBg3);
-    opacity: 0;
-  }
-
   & > * {
-    isolation: isolate;
-    z-index: 2;
     margin-top: var(--spacingSm);
   }
 
   &[data-is-dragging-over='true'] {
-    &::before {
-      opacity: 1;
-    }
+    background-color: var(--colorBg3);
   }
 }
