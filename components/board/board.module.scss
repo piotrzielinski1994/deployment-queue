@@ -1,12 +1,13 @@
 .wrapper {
-  width: 100%;
-  max-width: 720px;
-  padding: 100px;
   grid-area: board;
+  align-self: center;
+  max-height: min(100vh, 700px);
   margin-inline: auto;
+  padding: var(--spacingSm);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacingMd);
   justify-content: center;
   align-items: start;
+  overflow-y: hidden;
 }

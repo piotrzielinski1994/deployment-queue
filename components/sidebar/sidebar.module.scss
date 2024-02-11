@@ -6,6 +6,7 @@
   justify-items: start;
   align-content: start;
   background-color: var(--colorBg1);
+  overflow-y: auto;
 
   & > * {
     margin-bottom: var(--spacingXs);

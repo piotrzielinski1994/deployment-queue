@@ -8,35 +8,20 @@ import { TAG_CONTAINER } from '../tags/tags.types';
 
 export const defaultQueue: Queue = {
   // columns,
-  columns: columns.map((column) => {
+  columns: columns.map((column, index) => {
     return {
       ...column,
-      cards: [
-        {
-          id: generateCardId(),
-          heading: 'John',
-          tags: [
-            {
-              ...tags[0],
-              id: generateTagId(),
-            },
-          ],
-        },
-        {
-          id: generateCardId(),
-          heading: 'Doe',
-          tags: [
-            {
-              ...tags[1],
-              id: generateTagId(),
-            },
-            {
-              ...tags[2],
-              id: generateTagId(),
-            },
-          ],
-        },
-      ],
+      cards: Array.from({ length: 3 }, (_, index) => ({
+        id: generateCardId(),
+        heading: `John ${index}`,
+        tags: Array.from({ length: Math.floor(Math.random() * 5) }, () => {
+          const index = Math.floor(Math.random() * tags.length);
+          return {
+            ...tags[index],
+            id: generateTagId(),
+          };
+        }),
+      })),
     };
   }),
 };

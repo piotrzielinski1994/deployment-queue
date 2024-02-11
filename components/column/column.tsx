@@ -22,11 +22,7 @@ const Column = ({ column }: ColumnProps) => {
   return (
     <Droppable droppableId={column.id} type={DndDroppable.CARDS}>
       {(droppableProvider, droppableSnapshot) => (
-        <div
-          className={styles.wrapper}
-          ref={droppableProvider.innerRef}
-          data-is-dragging-over={droppableSnapshot.isDraggingOver}
-        >
+        <div className={styles.wrapper}>
           <header className={styles.header}>
             <h2 className={styles.heading}>{column.heading}</h2>
             {column.canAddCard && (
@@ -41,12 +37,21 @@ const Column = ({ column }: ColumnProps) => {
               </form>
             )}
           </header>
-          <div className={styles.container} data-droppable="column">
-            {column.cards.map((card, index) => {
-              return <Card key={card.id} card={card} index={index} />;
-            })}
+          <div
+            className={styles.scrollableContainer}
+            data-droppable="column"
+            ref={droppableProvider.innerRef}
+          >
+            <div
+              className={styles.container}
+              data-is-dragging-over={droppableSnapshot.isDraggingOver}
+            >
+              {column.cards.map((card, index) => {
+                return <Card key={card.id} card={card} index={index} />;
+              })}
+              {droppableProvider.placeholder}
+            </div>
           </div>
-          {droppableProvider.placeholder}
         </div>
       )}
     </Droppable>
