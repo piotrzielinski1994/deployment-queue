@@ -4,8 +4,8 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useQueue } from '@/data/queue/queue.hooks';
 import { QueueProviderProps } from './queue.provider.types';
 import { QueueEntity, QueueManager } from '@/data/queue/queue.types';
-import { takeQueueAction, takeQueueEntity } from '@/data/queue/queue.helpers';
-import { toQueueManagableConfig } from '@/data/queue/queue.transformers';
+import { takeQueueEntity } from '@/data/queue/queue.helpers';
+import { toQueueAction } from '@/data/queue/queue.transformers';
 
 export const QueueContext = React.createContext<QueueManager>({} as QueueManager);
 
@@ -16,9 +16,7 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
   const onDragEnd: QueueManager['onDragEnd'] = useCallback(
     (metadata) => {
       setIsDragging(false);
-      const config = toQueueManagableConfig(metadata);
-      console.log('@@@ config | ', config);
-      const action = takeQueueAction(config);
+      const action = toQueueAction(metadata);
       console.log('@@@ action | ', action);
       if (!action) return;
       dispatchQueue(action);
@@ -31,13 +29,12 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
     if (!queueEntity) return;
     if ([QueueEntity.COLUMN].includes(queueEntity)) return;
     setIsDragging(true);
-    console.log('@@@ metadata | ', metadata);
   }, []);
 
   const addCard: QueueManager['addCard'] = useCallback(
     (card, columnId) => {
       dispatchQueue({
-        type: 'insert',
+        type: 'add-card',
         payload: {
           card,
           dst: {

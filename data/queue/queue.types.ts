@@ -32,15 +32,17 @@ export interface QueueManagableConfig {
 }
 
 export type QueueAction =
-  | QueueInsert
+  | QueueAddCard
   | QueueRemoveCard
   | QueueRemoveTag
-  | QueueReorder
-  | QueueCopy
-  | QueueMove;
+  | QueueReorderCards
+  | QueueReorderTags
+  | QueueAddTag
+  | QueueMoveCardBetweenColumns
+  | QueueMoveTagBetweenCards;
 
-interface QueueInsert {
-  type: 'insert';
+interface QueueAddCard {
+  type: 'add-card';
   payload: Omit<QueuePayload, 'src'> & {
     card: Card;
   };
@@ -60,19 +62,51 @@ interface QueueRemoveTag {
   };
 }
 
-interface QueueReorder {
-  type: 'reorder';
-  payload: QueuePayload;
+interface QueueReorderCards {
+  type: 'reorder-cards';
+  payload: {
+    columnId: Column['id'];
+    srcIndex: number;
+    dstIndex: number;
+  };
 }
 
-interface QueueCopy {
-  type: 'copy';
-  payload: QueuePayload;
+interface QueueReorderTags {
+  type: 'reorder-tags';
+  payload: {
+    cardId: Card['id'];
+    srcIndex: number;
+    dstIndex: number;
+  };
 }
 
-interface QueueMove {
-  type: 'move';
-  payload: QueuePayload;
+interface QueueAddTag {
+  type: 'add-tag';
+  payload: {
+    cardId: Card['id'];
+    dstIndex: number;
+    tag: Tag;
+  };
+}
+
+interface QueueMoveCardBetweenColumns {
+  type: 'move-card-between-columns';
+  payload: {
+    srcColumnId: Column['id'];
+    srcIndex: number;
+    dstColumnId: Column['id'];
+    dstIndex: number;
+  };
+}
+
+interface QueueMoveTagBetweenCards {
+  type: 'move-tag-between-cards';
+  payload: {
+    srcCardId: Card['id'];
+    srcIndex: number;
+    dstCardId: Card['id'];
+    dstIndex: number;
+  };
 }
 
 interface QueuePayload {
