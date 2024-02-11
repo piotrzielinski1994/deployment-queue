@@ -51,6 +51,7 @@
   padding-inline: var(--spacingSm);
   background-color: var(--colorBg2);
   border: none;
+  border-radius: var(--radiusXs);
 
   &:placeholder-shown {
     color: var(--colorText);

@@ -1,6 +1,7 @@
 .wrapper {
   background-color: var(--colorBg2);
   cursor: grab;
+  border-radius: var(--radiusXs);
 }
 
 .droppable {
@@ -8,7 +9,6 @@
   padding: var(--spacingSm);
   padding-bottom: calc(var(--spacingSm) - var(--spacingXs));
   display: grid;
-  // gap: var(--spacingSm);
 
   &::before {
     content: '';
@@ -42,11 +42,7 @@
 
   & > * {
     margin-bottom: var(--spacingXs);
-    // outline: 1px solid red;
   }
-  // display: flex;
-  // flex-wrap: wrap;
-  // gap: var(--spacingXs);
 }
 
 .empty {

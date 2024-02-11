@@ -3,14 +3,9 @@
   padding-inline: var(--spacingXs);
   display: grid;
   align-items: center;
-  border-radius: 2px;
-  background-color: var(--colorBgActive);
+  border-radius: var(--radiusXs2);
+  background-color: var(--_colorBg);
   color: #fff;
   font-size: var(--fontSizeXs);
   cursor: grab;
-  // margin-bottom: 5px;
-
-  [data-is-dragging='true'] {
-    background-color: red;
-  }
 }

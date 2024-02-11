@@ -17,8 +17,8 @@ export const defaultQueue: Queue = {
           heading: 'John',
           tags: [
             {
+              ...tags[0],
               id: generateTagId(),
-              label: tags[0].label,
             },
           ],
         },
@@ -27,12 +27,12 @@ export const defaultQueue: Queue = {
           heading: 'Doe',
           tags: [
             {
+              ...tags[1],
               id: generateTagId(),
-              label: tags[1].label,
             },
             {
+              ...tags[2],
               id: generateTagId(),
-              label: tags[2].label,
             },
           ],
         },

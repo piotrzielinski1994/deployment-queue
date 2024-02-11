@@ -14,7 +14,7 @@ const Tag = ({ tag, index }: TagProps) => {
             {...provided.dragHandleProps}
             data-is-dragging={snapshot.isDragging}
             className={styles.wrapper}
-            style={provided.draggableProps.style}
+            style={{ ...provided.draggableProps.style, '--_colorBg': tag.bgColor }}
           >
             {tag.label}
           </div>

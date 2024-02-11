@@ -2,92 +2,32 @@ import { generateTagId } from '@/utils/id';
 import { Tag } from './tags.types';
 
 export const tags: Tag[] = [
-  {
+  'agency-ms',
+  'commission-ms',
+  'docker-images',
+  'feature-ms',
+  'file-upload-ms',
+  'influencer-ms',
+  'instagram-integration-ms',
+  'k8s',
+  'kotlin-shared',
+  'marketplace-ms',
+  'notification-ms',
+  'partnerize-adapter-ms',
+  'payment-details-ms',
+  'profile-ms',
+  'programme-ms',
+  'reporting-ms',
+  'society-admin-ui',
+  'society-app-ui',
+  'watchman-ms',
+  'society-keycloak-theme',
+  'transaction-ms',
+  'unity-deployment-manager',
+]
+  .sort()
+  .map((label, index, arr) => ({
     id: generateTagId(),
-    label: 'file-upload-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'partnerize-adapter-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'marketplace-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'society-app-ui',
-  },
-  {
-    id: generateTagId(),
-    label: 'transaction-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'society-admin-ui',
-  },
-  {
-    id: generateTagId(),
-    label: 'commission-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'instagram-integration-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'kotlin-shared',
-  },
-  {
-    id: generateTagId(),
-    label: 'agency-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'influencer-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'feature-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'notification-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'watchman-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'programme-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'payment-details-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'docker-images',
-  },
-  {
-    id: generateTagId(),
-    label: 'profile-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'unity-deployment-manager',
-  },
-  {
-    id: generateTagId(),
-    label: 'reporting-ms',
-  },
-  {
-    id: generateTagId(),
-    label: 'k8s',
-  },
-  {
-    id: generateTagId(),
-    label: 'society-keycloak-theme',
-  },
-];
+    label,
+    bgColor: `hsl(${(360 / arr.length) * index}, 100%, 20%)`,
+  }));
