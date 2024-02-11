@@ -9,12 +9,7 @@ import styles from './dashboard.module.scss';
 import { toQueueManagableConfig } from '@/data/queue/queue.transformers';
 
 export const Dashboard = () => {
-  const { manageQueue, onDragStart } = useQueue();
-  const onDragEnd: OnDragEndResponder = (metadata) => {
-    console.log('@@@ metadata | ', metadata);
-    const config = toQueueManagableConfig(metadata);
-    manageQueue(config);
-  };
+  const { onDragStart, onDragEnd } = useQueue();
 
   return (
     <div className={styles.wrapper}>

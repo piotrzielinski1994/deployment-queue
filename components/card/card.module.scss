@@ -53,6 +53,7 @@
 }
 
 .btnRemove {
+  margin-right: calc(-1 * var(--spacingXs));
   padding: var(--spacingXs);
   border: none;
   background-color: transparent;

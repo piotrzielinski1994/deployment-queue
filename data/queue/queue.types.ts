@@ -1,14 +1,14 @@
 import { Card } from '@/data/cards/cards.types';
 import { Column } from '@/data/columns/columns.types';
 import { Tag } from '@/data/tags/tags.types';
-import { BeforeCapture } from '@hello-pangea/dnd';
+import { BeforeCapture, DropResult } from '@hello-pangea/dnd';
 import { DndDroppable } from '../dnd/dnd.types';
 
 export interface QueueManager {
   queue: Queue;
   isDragging: boolean;
-  manageQueue: (data: QueueManagableConfig) => void;
   onDragStart: (metadata: BeforeCapture) => void;
+  onDragEnd: (metadata: DropResult) => void;
   addCard: (card: Card, columnId: Column['id']) => void;
   removeCard: (cardId: Card['id']) => void;
   removeTag: (tagId: Tag['id']) => void;
