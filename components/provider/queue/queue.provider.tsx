@@ -5,7 +5,6 @@ import { useQueue } from '@/data/queue/queue.hooks';
 import { QueueProviderProps } from './queue.provider.types';
 import { QueueEntity, QueueManager } from '@/data/queue/queue.types';
 import { takeQueueAction, takeQueueEntity } from '@/data/queue/queue.helpers';
-import { BeforeCapture } from '@hello-pangea/dnd';
 
 export const QueueContext = React.createContext<QueueManager>({} as QueueManager);
 
@@ -50,6 +49,13 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
     [dispatchQueue],
   );
 
+  const removeTag: QueueManager['removeTag'] = useCallback(
+    (tagId) => {
+      dispatchQueue({ type: 'remove-tag', payload: { tagId } });
+    },
+    [dispatchQueue],
+  );
+
   const state = useMemo(() => {
     return {
       queue,
@@ -57,8 +63,9 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
       manageQueue,
       onDragStart,
       addCard,
+      removeTag,
     };
-  }, [queue, isDragging, manageQueue, onDragStart, addCard]);
+  }, [queue, isDragging, manageQueue, onDragStart, addCard, removeTag]);
 
   return <QueueContext.Provider value={state}>{children}</QueueContext.Provider>;
 };

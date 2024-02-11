@@ -2,8 +2,11 @@ import React, { useMemo } from 'react';
 import styles from './tag.module.scss';
 import { TagProps } from './tag.types';
 import { Draggable } from '@hello-pangea/dnd';
+import { useQueue } from '@/components/provider/queue/queue.provider.hooks';
 
 const Tag = ({ tag, index }: TagProps) => {
+  const { removeTag } = useQueue();
+
   const customStyles = {
     '--_colorBg': tag.bgColor,
   };
@@ -13,17 +16,13 @@ const Tag = ({ tag, index }: TagProps) => {
       <>
         <span className={styles.label}>{tag.label}</span>
         {tag.canBeRemoved && (
-          <button
-            type="button"
-            className={styles.btnRemove}
-            onClick={() => console.log('@@@ remove tag')}
-          >
+          <button type="button" className={styles.btnRemove} onClick={() => removeTag(tag.id)}>
             &times;
           </button>
         )}
       </>
     );
-  }, [tag]);
+  }, [tag, removeTag]);
 
   return (
     <Draggable draggableId={tag.id} index={index}>

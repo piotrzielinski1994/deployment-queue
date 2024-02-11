@@ -48,18 +48,20 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
         }),
       };
     }
-    case 'remove': {
-      return queue;
-      const cards = columns[action.payload.src.droppableId].cards.filter(
-        (card) => card.id !== action.payload.draggableId,
-      );
-
+    case 'remove-tag': {
       return {
-        ...columns,
-        [action.payload.src.droppableId]: {
-          ...columns[action.payload.src.droppableId],
-          cards: cards,
-        },
+        ...queue,
+        columns: queue.columns.map((column) => {
+          return {
+            ...column,
+            cards: column.cards.map((card) => {
+              return {
+                ...card,
+                tags: card.tags.filter((tag) => tag.id !== action.payload.tagId),
+              };
+            }),
+          };
+        }),
       };
     }
     case 'reorder': {

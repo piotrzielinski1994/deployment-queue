@@ -41,8 +41,8 @@ const Card = forwardRef(
                           return <Tag key={tag.id} tag={tag} index={index} />;
                         })
                       )}
+                      {droppableProvider.placeholder}
                     </div>
-                    {droppableProvider.placeholder}
                   </div>
                 </div>
               );

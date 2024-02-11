@@ -1,14 +1,16 @@
-import { Column } from '@/data/columns/columns.types';
-import { DndDroppable } from '../dnd/dnd.types';
 import { Card } from '@/data/cards/cards.types';
+import { Column } from '@/data/columns/columns.types';
+import { Tag } from '@/data/tags/tags.types';
 import { BeforeCapture } from '@hello-pangea/dnd';
+import { DndDroppable } from '../dnd/dnd.types';
 
 export interface QueueManager {
   queue: Queue;
   isDragging: boolean;
   manageQueue: (data: QueueManagableConfig) => void;
-  addCard: (card: Card, columnId: Column['id']) => void;
   onDragStart: (metadata: BeforeCapture) => void;
+  addCard: (card: Card, columnId: Column['id']) => void;
+  removeTag: (id: Tag['id']) => void;
 }
 
 export interface Queue {
@@ -28,7 +30,7 @@ export interface QueueManagableConfig {
   } | null;
 }
 
-export type QueueAction = QueueInsert | QueueRemove | QueueReorder | QueueCopy | QueueMove;
+export type QueueAction = QueueInsert | QueueRemoveTag | QueueReorder | QueueCopy | QueueMove;
 
 interface QueueInsert {
   type: 'insert';
@@ -37,10 +39,10 @@ interface QueueInsert {
   };
 }
 
-interface QueueRemove {
-  type: 'remove';
-  payload: Omit<QueuePayload, 'dst'> & {
-    draggableId: string;
+interface QueueRemoveTag {
+  type: 'remove-tag';
+  payload: {
+    tagId: Tag['id'];
   };
 }
 

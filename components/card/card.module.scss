@@ -50,6 +50,7 @@
 .content {
   display: grid;
   justify-items: start;
+  outline: 1px solid red;
 
   & > * {
     margin-bottom: var(--spacingXs);
