@@ -3,11 +3,11 @@ import { Droppable } from '@hello-pangea/dnd';
 import styles from './sidebar.module.scss';
 import { DndDroppable } from '@/data/dnd/dnd.types';
 import { tags } from '@/data/tags/tags';
-import { TAG_CONTAINER } from '@/data/tags/tags.types';
+import { StaticDropZone } from '@/data/queue/queue.types';
 
 const SidebarContainer = () => {
   return (
-    <Droppable type={DndDroppable.TAGS} droppableId={TAG_CONTAINER} isDropDisabled={true}>
+    <Droppable type={DndDroppable.TAGS} droppableId={StaticDropZone.TAGS} isDropDisabled={true}>
       {(provided, snapshot) => (
         <div
           className={styles.wrapper}

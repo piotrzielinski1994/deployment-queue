@@ -2,8 +2,14 @@ import { tags } from '@/data/tags/tags';
 import { columns } from '@/data/columns/columns';
 import { DroppableProps } from '@hello-pangea/dnd';
 import { generateCardId, generateTagId } from '@/utils/helpers/ids.helpers';
-import { Queue, QueueAction, QueueManagableConfig, QueueManager } from './queue.types';
-import { TAG_CONTAINER } from '../tags/tags.types';
+import {
+  Queue,
+  QueueAction,
+  QueueEntity,
+  QueueManagableConfig,
+  StaticDropZone,
+} from './queue.types';
+import { Tag } from '../tags/tags.types';
 
 export const defaultQueue: Queue = {
   // columns,
@@ -90,7 +96,9 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
       const tag = tags[action.payload.src.index];
       if (tag === undefined) return queue;
 
-      dstTags.splice(action.payload.dst.index, 0, { ...tag, id: generateTagId() });
+      const copiedTag: Tag = { ...tag, id: generateTagId(), canBeRemoved: true };
+
+      dstTags.splice(action.payload.dst.index, 0, copiedTag);
 
       return {
         columns: queue.columns.map((column) => {
@@ -150,7 +158,7 @@ export const takeQueueActionType = (
   switch (source) {
     case destination:
       return 'reorder';
-    case TAG_CONTAINER:
+    case StaticDropZone.TAGS:
       return 'copy';
     default:
       return 'move';
@@ -212,4 +220,11 @@ export const takeQueueAction = (
 
 const takeColumn = (queue: Queue, columnId: string) => {
   return queue.columns.find((column) => column.id === columnId);
+};
+
+export const takeQueueEntity = (id: string): QueueEntity | null => {
+  const stringifiedTypes = Object.values(QueueEntity).map(String);
+  const prefix = id.split('__').at(0) as QueueEntity;
+  if (!stringifiedTypes.includes(prefix)) return null;
+  return prefix as QueueEntity;
 };

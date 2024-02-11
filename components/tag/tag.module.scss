@@ -1,11 +1,27 @@
 .wrapper {
   padding-block: var(--spacingXs2);
-  padding-inline: var(--spacingXs);
-  display: grid;
+  display: flex;
   align-items: center;
+  gap: var(--spacingXs2);
   border-radius: var(--radiusXs2);
   background-color: var(--_colorBg);
   color: #fff;
-  font-size: var(--fontSizeXs);
   cursor: grab;
+}
+
+.label {
+  margin-inline: var(--spacingXs);
+  font-size: var(--fontSizeXs);
+
+  &:has(~ button) {
+    margin-right: 0;
+  }
+}
+
+.btnRemove {
+  padding-inline: var(--spacingXs);
+  border: none;
+  background-color: transparent;
+  font-size: var(--fontSizeXs);
+  cursor: pointer;
 }

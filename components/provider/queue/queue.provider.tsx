@@ -1,18 +1,21 @@
 'use client';
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useQueue } from '@/data/queue/queue.hooks';
 import { QueueProviderProps } from './queue.provider.types';
-import { QueueManager } from '@/data/queue/queue.types';
-import { takeQueueAction } from '@/data/queue/queue.helpers';
+import { QueueEntity, QueueManager } from '@/data/queue/queue.types';
+import { takeQueueAction, takeQueueEntity } from '@/data/queue/queue.helpers';
+import { BeforeCapture } from '@hello-pangea/dnd';
 
 export const QueueContext = React.createContext<QueueManager>({} as QueueManager);
 
 const QueueProvider = ({ children }: QueueProviderProps) => {
   const { queue, dispatchQueue } = useQueue();
+  const [isDragging, setIsDragging] = useState(false);
 
   const manageQueue: QueueManager['manageQueue'] = useCallback(
     (data) => {
+      setIsDragging(false);
       console.log('@@@ data | ', data);
       const action = takeQueueAction(data);
       console.log('@@@ action | ', action);
@@ -21,6 +24,14 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
     },
     [dispatchQueue],
   );
+
+  const onDragStart: QueueManager['onDragStart'] = useCallback((metadata) => {
+    const queueEntity = takeQueueEntity(metadata.draggableId);
+    if (!queueEntity) return;
+    if ([QueueEntity.COLUMN].includes(queueEntity)) return;
+    setIsDragging(true);
+    console.log('@@@ metadata | ', metadata);
+  }, []);
 
   const addCard: QueueManager['addCard'] = useCallback(
     (card, columnId) => {
@@ -42,10 +53,12 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
   const state = useMemo(() => {
     return {
       queue,
+      isDragging,
       manageQueue,
+      onDragStart,
       addCard,
     };
-  }, [queue, manageQueue, addCard]);
+  }, [queue, isDragging, manageQueue, onDragStart, addCard]);
 
   return <QueueContext.Provider value={state}>{children}</QueueContext.Provider>;
 };

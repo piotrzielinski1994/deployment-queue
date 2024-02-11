@@ -1,11 +1,14 @@
 import { Column } from '@/data/columns/columns.types';
 import { DndDroppable } from '../dnd/dnd.types';
 import { Card } from '@/data/cards/cards.types';
+import { BeforeCapture } from '@hello-pangea/dnd';
 
 export interface QueueManager {
   queue: Queue;
+  isDragging: boolean;
   manageQueue: (data: QueueManagableConfig) => void;
   addCard: (card: Card, columnId: Column['id']) => void;
+  onDragStart: (metadata: BeforeCapture) => void;
 }
 
 export interface Queue {
@@ -66,4 +69,14 @@ interface QueuePayload {
     index: number;
     droppableType: string;
   };
+}
+
+export enum QueueEntity {
+  COLUMN = 'column',
+  CARD = 'card',
+  TAG = 'tag',
+}
+
+export enum StaticDropZone {
+  TAGS = 'tags',
 }

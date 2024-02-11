@@ -1,7 +1,8 @@
+import { QueueEntity } from '../queue/queue.types';
+
 export interface Tag {
-  id: `tag__${string}`;
+  id: `${QueueEntity.TAG}__${string}`;
   label: string;
   bgColor: `hsl(${number}, ${number}%, ${number}%)`;
+  canBeRemoved?: true;
 }
-
-export const TAG_CONTAINER = 'tags';

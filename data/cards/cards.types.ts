@@ -1,7 +1,8 @@
 import { Tag } from '@/data/tags/tags.types';
+import { QueueEntity } from '../queue/queue.types';
 
 export interface Card {
-  id: `card__${string}`;
+  id: `${QueueEntity.CARD}__${string}`;
   heading: string;
   tags: Tag[];
 }
