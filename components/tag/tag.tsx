@@ -27,23 +27,16 @@ const Tag = ({ tag, index }: TagProps) => {
   return (
     <Draggable draggableId={tag.id} index={index}>
       {(provided, snapshot) => (
-        <>
-          <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            data-is-dragging={snapshot.isDragging}
-            className={styles.wrapper}
-            style={{ ...provided.draggableProps.style, ...customStyles }}
-          >
-            {content}
-          </div>
-          {snapshot.isDragging && (
-            <div className={styles.wrapper} style={customStyles}>
-              {content}
-            </div>
-          )}
-        </>
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          data-is-dragging={snapshot.isDragging}
+          className={styles.wrapper}
+          style={{ ...provided.draggableProps.style, ...customStyles }}
+        >
+          {content}
+        </div>
       )}
     </Draggable>
   );
