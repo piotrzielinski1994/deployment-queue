@@ -174,12 +174,10 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
             ...column,
             cards: column.cards.map((card) => {
               if (card.id === srcCard.id) {
-                console.log('@@@ srcCard | ');
                 return { ...card, tags: srcTags };
               }
 
               if (card.id === dstCard.id) {
-                console.log('@@@ dstCard | ');
                 return { ...card, tags: dstTags };
               }
 

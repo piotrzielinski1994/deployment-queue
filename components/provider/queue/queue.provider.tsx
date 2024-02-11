@@ -17,7 +17,6 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
     (metadata) => {
       setIsDragging(false);
       const action = toQueueAction(metadata);
-      console.log('@@@ action | ', action);
       if (!action) return;
       dispatchQueue(action);
     },

@@ -5,6 +5,7 @@ import { takeQueueEntity } from './queue.helpers';
 import { Column } from '../columns/columns.types';
 import { Card } from '../cards/cards.types';
 import { tags } from '../tags/tags';
+import { generateTagId } from '@/utils/helpers/ids.helpers';
 
 export const toQueueManagableConfig = ({
   type,
@@ -64,7 +65,6 @@ export const toQueueAction = (metadata: DropResult): QueueAction | undefined => 
       return undefined;
     }
     case StaticDropZone.TAGS:
-      console.log('@@@ metadata.destination.droppableId | ', metadata.destination.droppableId);
       const tagToDuplicate = tags[metadata.source.index];
       if (!tagToDuplicate) return undefined;
       return {
@@ -74,6 +74,7 @@ export const toQueueAction = (metadata: DropResult): QueueAction | undefined => 
           dstIndex: metadata.destination.index,
           tag: {
             ...tagToDuplicate,
+            id: generateTagId(),
             canBeRemoved: true,
           },
         },
