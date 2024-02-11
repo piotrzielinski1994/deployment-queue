@@ -43,14 +43,28 @@
   }
 }
 
-.heading {
+.header {
   margin-bottom: var(--spacingSm);
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.heading {
+}
+
+.btnRemove {
+  padding: var(--spacingXs);
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font-size: var(--fontSizeMd);
+  line-height: 0.5;
+  cursor: pointer;
 }
 
 .content {
   display: grid;
   justify-items: start;
-  outline: 1px solid red;
 
   & > * {
     margin-bottom: var(--spacingXs);

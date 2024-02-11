@@ -48,6 +48,17 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
         }),
       };
     }
+    case 'remove-card': {
+      return {
+        ...queue,
+        columns: queue.columns.map((column) => {
+          return {
+            ...column,
+            cards: column.cards.filter((card) => card.id !== action.payload.cardId),
+          };
+        }),
+      };
+    }
     case 'remove-tag': {
       return {
         ...queue,

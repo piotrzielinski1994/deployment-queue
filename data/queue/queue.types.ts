@@ -10,7 +10,8 @@ export interface QueueManager {
   manageQueue: (data: QueueManagableConfig) => void;
   onDragStart: (metadata: BeforeCapture) => void;
   addCard: (card: Card, columnId: Column['id']) => void;
-  removeTag: (id: Tag['id']) => void;
+  removeCard: (cardId: Card['id']) => void;
+  removeTag: (tagId: Tag['id']) => void;
 }
 
 export interface Queue {
@@ -30,12 +31,25 @@ export interface QueueManagableConfig {
   } | null;
 }
 
-export type QueueAction = QueueInsert | QueueRemoveTag | QueueReorder | QueueCopy | QueueMove;
+export type QueueAction =
+  | QueueInsert
+  | QueueRemoveCard
+  | QueueRemoveTag
+  | QueueReorder
+  | QueueCopy
+  | QueueMove;
 
 interface QueueInsert {
   type: 'insert';
   payload: Omit<QueuePayload, 'src'> & {
     card: Card;
+  };
+}
+
+interface QueueRemoveCard {
+  type: 'remove-card';
+  payload: {
+    cardId: Card['id'];
   };
 }
 

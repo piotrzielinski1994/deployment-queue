@@ -5,9 +5,11 @@ import { ForwardedRef, forwardRef } from 'react';
 import styles from './card.module.scss';
 import { CardProps } from './card.types';
 import { mergeClasses } from '@/utils/helpers/classnames.helpers';
+import { useQueue } from '@/components/provider/queue/queue.provider.hooks';
 
 const Card = forwardRef(
   ({ card, index, nativeProps }: CardProps, ref: ForwardedRef<HTMLDivElement>) => {
+    const { removeCard } = useQueue();
     return (
       <Draggable draggableId={card.id} index={index}>
         {(dragProvider, dragSnapshot) => (
@@ -31,7 +33,16 @@ const Card = forwardRef(
                     ref={droppableProvider.innerRef}
                     data-is-dragging-over={droppableSnapshot.isDraggingOver}
                   >
-                    <h3 className={styles.heading}>{card.heading}</h3>
+                    <header className={styles.header}>
+                      <h3 className={styles.heading}>{card.heading}</h3>
+                      <button
+                        type="button"
+                        className={styles.btnRemove}
+                        onClick={() => removeCard(card.id)}
+                      >
+                        &times;
+                      </button>
+                    </header>
 
                     <div className={styles.content}>
                       {card.tags.length === 0 ? (

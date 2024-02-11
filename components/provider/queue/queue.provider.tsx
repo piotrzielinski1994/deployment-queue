@@ -49,6 +49,13 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
     [dispatchQueue],
   );
 
+  const removeCard: QueueManager['removeCard'] = useCallback(
+    (cardId) => {
+      dispatchQueue({ type: 'remove-card', payload: { cardId } });
+    },
+    [dispatchQueue],
+  );
+
   const removeTag: QueueManager['removeTag'] = useCallback(
     (tagId) => {
       dispatchQueue({ type: 'remove-tag', payload: { tagId } });
@@ -63,9 +70,10 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
       manageQueue,
       onDragStart,
       addCard,
+      removeCard,
       removeTag,
     };
-  }, [queue, isDragging, manageQueue, onDragStart, addCard, removeTag]);
+  }, [queue, isDragging, manageQueue, onDragStart, addCard, removeCard, removeTag]);
 
   return <QueueContext.Provider value={state}>{children}</QueueContext.Provider>;
 };
