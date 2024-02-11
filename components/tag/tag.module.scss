@@ -7,12 +7,6 @@
   background-color: var(--_colorBg);
   color: #fff;
   cursor: grab;
-
-  &[data-is-dragging='true'] {
-    isolation: isolate;
-    z-index: 10;
-    background-color: red !important;
-  }
 }
 
 .label {
