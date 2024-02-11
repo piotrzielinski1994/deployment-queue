@@ -1,8 +1,7 @@
 import { tags } from '@/data/tags/tags';
 import { columns } from '@/data/columns/columns';
 import { DroppableProps } from '@hello-pangea/dnd';
-import { generateCardId, generateTagId } from '@/utils/id';
-import { Card } from '@/data/cards/cards.types';
+import { generateCardId, generateTagId } from '@/utils/helpers/ids.helpers';
 import { Queue, QueueAction, QueueManagableConfig, QueueManager } from './queue.types';
 import { TAG_CONTAINER } from '../tags/tags.types';
 
@@ -33,18 +32,12 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
   // TODO: Remove mutations
   switch (action.type) {
     case 'insert': {
-      const card: Card = {
-        id: generateCardId(),
-        heading: action.payload.name,
-        tags: [],
-      };
-
       return {
         columns: queue.columns.map((column) => {
           if (column.id !== action.payload.dst.droppableId) return column;
           return {
             ...column,
-            cards: [...column.cards, card],
+            cards: [...column.cards, action.payload.card],
           };
         }),
       };

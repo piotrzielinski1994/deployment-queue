@@ -1,4 +1,4 @@
-import { generateTagId } from '@/utils/id';
+import { generateTagId } from '@/utils/helpers/ids.helpers';
 import { Tag } from './tags.types';
 
 export const tags: Tag[] = [

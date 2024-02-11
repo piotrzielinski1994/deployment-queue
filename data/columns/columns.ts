@@ -1,4 +1,4 @@
-import { generateColumnId } from '@/utils/id';
+import { generateColumnId } from '@/utils/helpers/ids.helpers';
 import { Column } from './columns.types';
 
 export const columns: Column[] = [

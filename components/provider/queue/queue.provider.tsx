@@ -23,11 +23,11 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
   );
 
   const addCard: QueueManager['addCard'] = useCallback(
-    (name, columnId) => {
+    (card, columnId) => {
       dispatchQueue({
         type: 'insert',
         payload: {
-          name,
+          card,
           dst: {
             droppableType: 'column',
             droppableId: columnId,

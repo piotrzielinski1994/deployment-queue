@@ -4,9 +4,12 @@ import { DndDroppable } from '@/data/dnd/dnd.types';
 import { Droppable } from '@hello-pangea/dnd';
 import styles from './column.module.scss';
 import { ColumnProps } from './column.types';
+import { generateCardId } from '@/utils/helpers/ids.helpers';
+import { useAddCard } from './column.hooks';
 
 const Column = ({ column }: ColumnProps) => {
   const { addCard } = useQueue();
+  const { idOfNewlyAddedCard, scrollToCardId, lastCardRef } = useAddCard(column.cards.length);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -16,7 +19,18 @@ const Column = ({ column }: ColumnProps) => {
 
     event.target.elements['name'].value = '';
 
-    addCard(name, column.id);
+    const id = generateCardId();
+
+    addCard(
+      {
+        id,
+        heading: name,
+        tags: [],
+      },
+      column.id,
+    );
+
+    scrollToCardId(id);
   };
 
   return (
@@ -47,7 +61,14 @@ const Column = ({ column }: ColumnProps) => {
               data-is-dragging-over={droppableSnapshot.isDraggingOver}
             >
               {column.cards.map((card, index) => {
-                return <Card key={card.id} card={card} index={index} />;
+                return (
+                  <Card
+                    key={card.id}
+                    card={card}
+                    index={index}
+                    ref={card.id === idOfNewlyAddedCard.current ? lastCardRef : null}
+                  />
+                );
               })}
               {droppableProvider.placeholder}
             </div>

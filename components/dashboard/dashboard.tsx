@@ -18,7 +18,12 @@ export const Dashboard = () => {
 
   return (
     <div className={styles.wrapper}>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext
+        onDragEnd={onDragEnd}
+        onBeforeCapture={(ev) => {
+          console.log('@@@ ev | ', ev);
+        }}
+      >
         <Sidebar />
         <Board />
       </DragDropContext>

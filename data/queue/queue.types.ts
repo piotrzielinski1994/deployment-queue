@@ -1,10 +1,11 @@
 import { Column } from '@/data/columns/columns.types';
 import { DndDroppable } from '../dnd/dnd.types';
+import { Card } from '@/data/cards/cards.types';
 
 export interface QueueManager {
   queue: Queue;
   manageQueue: (data: QueueManagableConfig) => void;
-  addCard: (name: string, columnId: Column['id']) => void;
+  addCard: (card: Card, columnId: Column['id']) => void;
 }
 
 export interface Queue {
@@ -29,7 +30,7 @@ export type QueueAction = QueueInsert | QueueRemove | QueueReorder | QueueCopy |
 interface QueueInsert {
   type: 'insert';
   payload: Omit<QueuePayload, 'src'> & {
-    name: string;
+    card: Card;
   };
 }
 
