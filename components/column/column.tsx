@@ -67,6 +67,10 @@ const Column = ({ column }: ColumnProps) => {
                     card={card}
                     index={index}
                     ref={card.id === idOfNewlyAddedCard.current ? lastCardRef : null}
+                    nativeProps={{
+                      'data-newly-added': card.id === idOfNewlyAddedCard.current,
+                      // 'data-newly-added': true,
+                    }}
                   />
                 );
               })}

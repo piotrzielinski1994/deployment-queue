@@ -1,8 +1,7 @@
-import { ForwardedRef } from 'react';
+import { ForwardedRef, LegacyRef } from 'react';
 
-export const mergeRefs = <T>(...refs: ForwardedRef<T>[]) => {
-  return (node) => {
-    console.log('@@@ typeof node | ', typeof node);
+export const mergeRefs = <T>(...refs: ForwardedRef<T>[]): LegacyRef<T> => {
+  return (node: T) => {
     refs.forEach((ref) => {
       if (!ref) return;
       if (typeof ref === 'function') return ref(node);

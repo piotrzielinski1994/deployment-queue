@@ -2,6 +2,17 @@
   background-color: var(--colorBg2);
   cursor: grab;
   border-radius: var(--radiusXs);
+
+  &[data-newly-added='true'] {
+    @keyframes changeColor {
+      100% {
+        background-color: var(--colorBg2);
+      }
+    }
+
+    background-color: var(--colorBgActive);
+    animation: changeColor 1s forwards;
+  }
 }
 
 .droppable {
