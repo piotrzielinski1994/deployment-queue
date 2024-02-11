@@ -9,7 +9,7 @@ const Tag = ({ tag, index }: TagProps) => {
 
   const customStyles = {
     '--_colorBg': tag.bgColor,
-  };
+  } as React.CSSProperties;
 
   const content = useMemo(() => {
     return (
