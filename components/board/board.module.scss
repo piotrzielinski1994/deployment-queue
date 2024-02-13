@@ -1,9 +1,26 @@
 .wrapper {
   grid-area: board;
+  padding: var(--spacingSm);
+  display: grid;
+  place-content: center;
+  gap: var(--spacingLg);
+  &[data-is-frozen='true'] {
+    background-color: var(--colorBgError);
+  }
+}
+
+.queueStatus {
+  text-align: center;
+
+  & > span {
+    font-weight: 600;
+  }
+}
+
+.columns {
   align-self: center;
   max-height: min(100vh, 700px);
   margin-inline: auto;
-  padding: var(--spacingSm);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacingMd);

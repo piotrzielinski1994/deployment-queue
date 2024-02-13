@@ -17,11 +17,13 @@ export const defaultQueue: Queue = {
           return {
             ...tags[index],
             id: generateTagId(),
+            canBeRemoved: true,
           };
         }),
       })),
     };
   }),
+  isFrozen: false,
 };
 
 export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
@@ -30,6 +32,7 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
   switch (action.type) {
     case 'add-card': {
       return {
+        ...queue,
         columns: queue.columns.map((column) => {
           if (column.id !== action.payload.dst.droppableId) return column;
           return {
@@ -47,6 +50,7 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
       dstTags.splice(action.payload.dstIndex, 0, action.payload.tag);
 
       return {
+        ...queue,
         columns: queue.columns.map((column) => {
           const cardsIds = column.cards.map((card) => card.id);
           if (!cardsIds.includes(dstCard.id)) return column;
@@ -101,6 +105,7 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
       dstCards.splice(action.payload.dstIndex, 0, removed);
 
       return {
+        ...queue,
         columns: queue.columns.map((column) => {
           if (column.id !== dstColumn.id) return column;
           return {
@@ -120,6 +125,7 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
       dstTags.splice(action.payload.dstIndex, 0, removed);
 
       return {
+        ...queue,
         columns: queue.columns.map((column) => {
           const cardsIds = column.cards.map((card) => card.id);
           if (!cardsIds.includes(dstCard.id)) return column;
@@ -149,6 +155,7 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
       dstCards.splice(action.payload.dstIndex, 0, removed);
 
       return {
+        ...queue,
         columns: queue.columns.map((column) => {
           if (column.id === srcColumn.id) return { ...column, cards: srcCards };
           if (column.id === dstColumn.id) return { ...column, cards: dstCards };
@@ -169,6 +176,7 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
       dstTags.splice(action.payload.dstIndex, 0, removed);
 
       return {
+        ...queue,
         columns: queue.columns.map((column) => {
           return {
             ...column,
@@ -185,6 +193,12 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
             }),
           };
         }),
+      };
+    }
+    case 'toggle-freeze-status': {
+      return {
+        ...queue,
+        isFrozen: !queue.isFrozen,
       };
     }
     default: {

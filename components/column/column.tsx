@@ -38,7 +38,7 @@ const Column = ({ column }: ColumnProps) => {
       {(droppableProvider, droppableSnapshot) => (
         <div className={styles.wrapper}>
           <header className={styles.header}>
-            <h2 className={styles.heading}>{column.heading}</h2>
+            <h3 className={styles.heading}>{column.heading}</h3>
             {column.canAddCard && (
               <form onSubmit={handleSubmit}>
                 <input

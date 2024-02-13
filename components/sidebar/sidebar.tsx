@@ -1,25 +1,14 @@
-import Tag from '@/components/tag/tag';
-import { Droppable } from '@hello-pangea/dnd';
+import FreezeBtn from '@/components/freeze-btn/freeze-btn';
+import Tags from '@/components/tags/tags';
 import styles from './sidebar.module.scss';
-import { DndDroppable } from '@/data/dnd/dnd.types';
-import { tags } from '@/data/tags/tags';
-import { StaticDropZone } from '@/data/queue/queue.types';
 
 const SidebarContainer = () => {
   return (
-    <Droppable type={DndDroppable.TAGS} droppableId={StaticDropZone.TAGS} isDropDisabled={true}>
-      {(provided, snapshot) => (
-        <div
-          className={styles.wrapper}
-          ref={provided.innerRef}
-          data-is-dragging={snapshot.isDraggingOver}
-        >
-          {tags.map((tag, index) => (
-            <Tag key={tag.id} tag={tag} index={index} />
-          ))}
-        </div>
-      )}
-    </Droppable>
+    <aside className={styles.wrapper}>
+      <FreezeBtn />
+      <hr className={styles.separator} />
+      <Tags />
+    </aside>
   );
 };
 

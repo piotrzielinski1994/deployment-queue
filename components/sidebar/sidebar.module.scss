@@ -2,13 +2,11 @@
   grid-area: sidebar;
   padding: var(--spacingMd);
   padding-bottom: calc(var(--spacingMd) - var(--spacingXs));
-  display: grid;
-  justify-items: start;
-  align-content: start;
   background-color: var(--colorBg1);
   overflow-y: auto;
+}
 
-  & > * {
-    margin-bottom: var(--spacingXs);
-  }
+.separator {
+  margin-block: var(--spacingMd);
+  color: var(--colorBg3);
 }

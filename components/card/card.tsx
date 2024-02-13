@@ -34,7 +34,7 @@ const Card = forwardRef(
                     data-is-dragging-over={droppableSnapshot.isDraggingOver}
                   >
                     <header className={styles.header}>
-                      <h3 className={styles.heading}>{card.heading}</h3>
+                      <h4 className={styles.heading}>{card.heading}</h4>
                       <button
                         type="button"
                         className={styles.btnRemove}

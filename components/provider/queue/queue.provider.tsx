@@ -61,6 +61,10 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
     [dispatchQueue],
   );
 
+  const toggleFreezeStatus: QueueManager['toggleFreezeStatus'] = useCallback(() => {
+    dispatchQueue({ type: 'toggle-freeze-status' });
+  }, [dispatchQueue]);
+
   const state = useMemo(() => {
     return {
       queue,
@@ -70,8 +74,18 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
       addCard,
       removeCard,
       removeTag,
+      toggleFreezeStatus,
     };
-  }, [queue, isDragging, onDragStart, onDragEnd, addCard, removeCard, removeTag]);
+  }, [
+    queue,
+    isDragging,
+    onDragStart,
+    onDragEnd,
+    addCard,
+    removeCard,
+    removeTag,
+    toggleFreezeStatus,
+  ]);
 
   return <QueueContext.Provider value={state}>{children}</QueueContext.Provider>;
 };

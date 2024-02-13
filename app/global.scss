@@ -6,13 +6,15 @@
   --colorBgSuccess: #137e69;
   --colorBgInfo: #0259b0;
   --colorBgWarning: #956d00;
-  --colorBgError: #3f242a;
-  --colorText: #7b83a3;
+  --colorBgError: #1e0c12;
+  // --colorText: #7b83a3;
+  --colorText: #ffffff;
 
   --spacingXs2: 2px;
   --spacingXs: 5px;
   --spacingSm: 10px;
   --spacingMd: 20px;
+  --spacingLg: 30px;
 
   --fontSizeXs: 0.8rem;
   --fontSizeSm: 1rem;
@@ -65,4 +67,20 @@ h6 {
 
 p {
   margin: 0;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+button {
+  cursor: pointer;
 }

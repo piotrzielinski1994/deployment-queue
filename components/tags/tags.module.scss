@@ -1,0 +1,10 @@
+.wrapper {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  background-color: var(--colorBg1);
+
+  & > * {
+    margin-bottom: var(--spacingXs);
+  }
+}

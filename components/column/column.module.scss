@@ -6,7 +6,7 @@
   grid-template-rows: auto 1fr;
   border-radius: var(--radiusXs);
   background-color: var(--colorBg1);
-  // box-shadow: 5px 5px 5px #fff8;
+  overflow: hidden;
 }
 
 .header {
@@ -44,7 +44,7 @@
 
 .scrollableContainer {
   max-height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .container {
