@@ -1,5 +1,10 @@
 .wrapper {
   display: grid;
+  gap: var(--spacingSm);
+}
+
+.content {
+  display: grid;
   justify-items: start;
   align-content: start;
   background-color: var(--colorBg1);

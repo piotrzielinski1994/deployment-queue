@@ -1,8 +1,9 @@
-import { tags } from '@/data/tags/tags';
+import { tags as allTags } from '@/data/tags/tags';
 import { columns } from '@/data/columns/columns';
 import { generateCardId, generateTagId } from '@/utils/helpers/ids.helpers';
 import { Queue, QueueAction, QueueEntity } from './queue.types';
-import { Card } from '../cards/cards.types';
+import { Card } from '@/data/cards/cards.types';
+import { Tag } from '@/data/tags/tags.types';
 
 export const defaultQueue: Queue = {
   // columns,
@@ -13,9 +14,9 @@ export const defaultQueue: Queue = {
         id: generateCardId(),
         heading: `John ${index}`,
         tags: Array.from({ length: Math.floor(Math.random() * 5) }, () => {
-          const index = Math.floor(Math.random() * tags.length);
+          const index = Math.floor(Math.random() * allTags.length);
           return {
-            ...tags[index],
+            ...allTags[index],
             id: generateTagId(),
             canBeRemoved: true,
           };
@@ -23,11 +24,11 @@ export const defaultQueue: Queue = {
       })),
     };
   }),
+  tags: allTags,
   isFrozen: false,
 };
 
 export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
-  console.log('@@@ action.type | ', action.type);
   // TODO: Remove mutations
   switch (action.type) {
     case 'add-card': {
@@ -47,7 +48,12 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
       if (dstCard === undefined) return queue;
 
       const dstTags = [...dstCard.tags];
-      dstTags.splice(action.payload.dstIndex, 0, action.payload.tag);
+      const newTag: Tag = {
+        ...queue.tags[action.payload.srcIndex],
+        id: generateTagId(),
+        canBeRemoved: true,
+      };
+      dstTags.splice(action.payload.dstIndex, 0, newTag);
 
       return {
         ...queue,
@@ -193,6 +199,12 @@ export const queueReducer = (queue: Queue, action: QueueAction): Queue => {
             }),
           };
         }),
+      };
+    }
+    case 'filter-tags': {
+      return {
+        ...queue,
+        tags: allTags.filter((tag) => tag.label.includes(action.payload.tagLabel)),
       };
     }
     case 'toggle-freeze-status': {

@@ -12,11 +12,13 @@ export interface QueueManager {
   addCard: (card: Card, columnId: Column['id']) => void;
   removeCard: (cardId: Card['id']) => void;
   removeTag: (tagId: Tag['id']) => void;
+  filterTags: (tagLabel: string) => void;
   toggleFreezeStatus: () => void;
 }
 
 export interface Queue {
   columns: Column[];
+  tags: Tag[];
   isFrozen: boolean;
 }
 
@@ -42,6 +44,7 @@ export type QueueAction =
   | QueueAddTag
   | QueueMoveCardBetweenColumns
   | QueueMoveTagBetweenCards
+  | QueueFilterTags
   | QueueToggleFreezeStatus;
 
 interface QueueAddCard {
@@ -87,8 +90,8 @@ interface QueueAddTag {
   type: 'add-tag';
   payload: {
     cardId: Card['id'];
+    srcIndex: number;
     dstIndex: number;
-    tag: Tag;
   };
 }
 
@@ -109,6 +112,13 @@ interface QueueMoveTagBetweenCards {
     srcIndex: number;
     dstCardId: Card['id'];
     dstIndex: number;
+  };
+}
+
+interface QueueFilterTags {
+  type: 'filter-tags';
+  payload: {
+    tagLabel: string;
   };
 }
 

@@ -64,21 +64,16 @@ export const toQueueAction = (metadata: DropResult): QueueAction | undefined => 
       }
       return undefined;
     }
-    case StaticDropZone.TAGS:
-      const tagToDuplicate = tags[metadata.source.index];
-      if (!tagToDuplicate) return undefined;
+    case StaticDropZone.TAGS: {
       return {
         type: 'add-tag',
         payload: {
           cardId: metadata.destination.droppableId as Card['id'],
+          srcIndex: metadata.source.index,
           dstIndex: metadata.destination.index,
-          tag: {
-            ...tagToDuplicate,
-            id: generateTagId(),
-            canBeRemoved: true,
-          },
         },
       };
+    }
     default: {
       if (draggedItemType === QueueEntity.CARD) {
         return {

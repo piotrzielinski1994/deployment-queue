@@ -61,6 +61,13 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
     [dispatchQueue],
   );
 
+  const filterTags: QueueManager['filterTags'] = useCallback(
+    (tagLabel) => {
+      dispatchQueue({ type: 'filter-tags', payload: { tagLabel } });
+    },
+    [dispatchQueue],
+  );
+
   const toggleFreezeStatus: QueueManager['toggleFreezeStatus'] = useCallback(() => {
     dispatchQueue({ type: 'toggle-freeze-status' });
   }, [dispatchQueue]);
@@ -74,6 +81,7 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
       addCard,
       removeCard,
       removeTag,
+      filterTags,
       toggleFreezeStatus,
     };
   }, [
@@ -84,6 +92,7 @@ const QueueProvider = ({ children }: QueueProviderProps) => {
     addCard,
     removeCard,
     removeTag,
+    filterTags,
     toggleFreezeStatus,
   ]);
 
